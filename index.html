@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Safari'nin IBAN'ı telefon numarası sanıp mavi yapmasını engeller -->
+    <!-- Safari'nin otomatik mavi yapmasını engeller -->
     <meta name="format-detection" content="telephone=no">
     <title>Kopyala</title>
     <style>
@@ -60,17 +60,18 @@
         }
         .iban-box {
             font-family: monospace;
-            font-size: 13.5px; /* Tek satıra tam sığması için optimize edildi */
+            font-size: 13.5px;
             color: #ffffff !important;
             letter-spacing: -0.2px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        /* Safari link rengini zorla beyaz yapar */
-        .iban-box a {
+        .phone-box {
+            font-family: monospace;
+            font-size: 16px;
             color: #ffffff !important;
-            text-decoration: none !important;
+            letter-spacing: 1px;
         }
         .btn {
             background: linear-gradient(135deg, #d4af37, #aa820a);
@@ -113,19 +114,25 @@
 <body>
 
     <div class="container">
-        <!-- Banka Adı -->
+        <!-- 1. Banka Adı (Bilgi) -->
         <div class="box bank-info">GARANTI BBVA</div>
 
-        <!-- İsim Kutusu ve Butonu -->
+        <!-- 2. İsim Kutusu ve Butonu -->
         <div class="group">
             <div class="box" id="nameText">YUNUS EMRE TÜRKMENLİO</div>
             <button class="btn" onclick="copyText('nameText', 'İsim Kopyalandı!')">İsmi Kopyala</button>
         </div>
 
-        <!-- IBAN Kutusu ve Butonu -->
+        <!-- 3. IBAN Kutusu ve Butonu -->
         <div class="group">
             <div class="box iban-box" id="ibanText">TR39 0006 2000 3360 0006 8417 86</div>
             <button class="btn" onclick="copyText('ibanText', 'IBAN Kopyalandı!')">IBAN'ı Kopyala</button>
+        </div>
+
+        <!-- 4. Telefon Kutusu ve Butonu -->
+        <div class="group">
+            <div class="box phone-box" id="phoneText">0531 634 93 57 </div>
+            <button class="btn" onclick="copyText('phoneText', 'Numara Kopyalandı!')">Numarayı Kopyala</button>
         </div>
     </div>
 
@@ -134,7 +141,12 @@
     <script>
         function copyText(elementId, message) {
             const text = document.getElementById(elementId).innerText.trim();
-            const cleanText = elementId === 'ibanText' ? text.replace(/\s/g, '') : text;
+            
+            // IBAN veya Telefon kopyalanırken boşlukları temizler
+            let cleanText = text;
+            if (elementId === 'ibanText' || elementId === 'phoneText') {
+                cleanText = text.replace(/\s/g, '');
+            }
 
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(cleanText).then(() => {
