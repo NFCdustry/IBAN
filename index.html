@@ -96,6 +96,7 @@
             width: 100%;
             cursor: pointer;
             transition: transform 0.1s ease, opacity 0.2s ease;
+            text-transform: uppercase;
         }
         .btn:active {
             transform: scale(0.98);
@@ -137,23 +138,23 @@
         <!-- 2. İsim Kutusu ve Butonu -->
         <div class="group">
             <div class="box" id="nameText">YUNUS EMRE TÜRKMENLİO</div>
-            <button class="btn" onclick="copyText('nameText', 'İsim Kopyalandı!')">İsmi Kopyala</button>
+            <button class="btn" onclick="copyText('nameText', 'İSİM KOPYALANDI!')">İSMİ KOPYALA</button>
         </div>
 
         <!-- 3. IBAN Kutusu ve Butonu -->
         <div class="group">
             <div class="box iban-box" id="ibanText">TR39 0006 2000 3360 0006 8417 86</div>
-            <button class="btn" onclick="copyText('ibanText', 'IBAN\'ı Kopyalandı!')">IBAN'ı Kopyala</button>
+            <button class="btn" onclick="copyText('ibanText', 'IBAN KOPYALANDI!')">IBAN'I KOPYALA</button>
         </div>
 
         <!-- 4. Telefon Kutusu ve Butonu -->
         <div class="group">
             <div class="box phone-box" id="phoneText">0531 634 93 57</div>
-            <button class="btn" onclick="copyText('phoneText', 'Numara Kopyalandı!')">Numarayı Kopyala</button>
+            <button class="btn" onclick="copyText('phoneText', 'NUMARA KOPYALANDI!')">NUMARAYI KOPYALA</button>
         </div>
     </div>
 
-    <div class="toast" id="toast">Kopyalandı!</div>
+    <div class="toast" id="toast">KOPYALANDI!</div>
 
     <script>
         function copyText(elementId, message) {
