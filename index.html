@@ -34,196 +34,17 @@
             gap: 18px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .box {
-            background: #111114;
-            border: 1px solid #2a2a30;
-            padding: 14px 10px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #ffffff;
-            text-align: center;
-            word-break: break-all;
-        }
-        .bank-info {
-            color: #d4af37;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            font-size: 15px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            background: #161510;
-        }
-        .iban-box {
-            font-family: monospace;
-            font-size: 13.5px;
-            color: #ffffff !important;
-            letter-spacing: -0.2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .phone-box {
-            font-family: monospace;
-            font-size: 16px;
-            color: #ffffff !important;
-            letter-spacing: 1px;
-        }
-        .btn {
-            background: linear-gradient(135deg, #d4af37, #aa820a);
-            color: #000000;
-            border: none;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 700;
-            width: 100%;
-            cursor: pointer;
-            transition: transform 0.1s ease, opacity 0.2s ease;
-        }
-        .btn:active {
-            transform: scale(0.98);
-        }
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: #22c55e;
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 14px;
-            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 999;
-            white-space: nowrap;
-        }
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <!-- 1. Banka Adı (Bilgi) -->
-        <div class="box bank-info">GARANTI BBVA</div>
-
-        <!-- 2. İsim Kutusu ve Butonu -->
-        <div class="group">
-            <div class="box" id="nameText">YUNUS EMRE TÜRKMENLİO</div>
-            <button class="btn" onclick="copyText('nameText', 'İsim Kopyalandı!')">İsmi Kopyala</button>
-        </div>
-
-        <!-- 3. IBAN Kutusu ve Butonu -->
-        <div class="group">
-            <div class="box iban-box" id="ibanText">TR39 0006 2000 3360 0006 8417 86</div>
-            <button class="btn" onclick="copyText('ibanText', 'IBAN Kopyalandı!')">IBAN'ı Kopyala</button>
-        </div>
-
-        <!-- 4. Telefon Kutusu ve Butonu -->
-        <div class="group">
-            <div class="box phone-box" id="phoneText">0531 634 93 57 </div>
-            <button class="btn" onclick="copyText('phoneText', 'Numara Kopyalandı!')">Numarayı Kopyala</button>
-        </div>
-    </div>
-
-    <div class="toast" id="toast">Kopyalandı!</div>
-
-    <script>
-        function copyText(elementId, message) {
-            const text = document.getElementById(elementId).innerText.trim();
-            
-            // IBAN veya Telefon kopyalanırken boşlukları temizler
-            let cleanText = text;
-            if (elementId === 'ibanText' || elementId === 'phoneText') {
-                cleanText = text.replace(/\s/g, '');
-            }
-
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(cleanText).then(() => {
-                    showToast(message);
-                }).catch(() => {
-                    fallbackCopy(cleanText, message);
-                });
-            } else {
-                fallbackCopy(cleanText, message);
-            }
-        }
-
-        function fallbackCopy(text, message) {
-            const tempInput = document.createElement("input");
-            tempInput.value = text;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-            showToast(message);
-        }
-
-        function showToast(message) {
-            const toast = document.getElementById("toast");
-            toast.innerText = message;
-            toast.classList.add("show");
-            setTimeout(() => {
-                toast.classList.remove("show");
-            }, 2000);
-        }
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Safari'nin otomatik mavi yapmasını engeller -->
-    <meta name="format-detection" content="telephone=no">
-    <title>Kopyala</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-        body {
-            background-color: #0f0f11;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container {
-            background: #1a1a1e;
-            border: 1px solid #2a2a30;
-            border-radius: 20px;
-            padding: 24px;
-            width: 100%;
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
         .logo-container {
             text-align: center;
-            margin-bottom: -4px;
+            margin-bottom: -5px;
         }
         .site-logo {
-            width: 70px;
-            height: auto;
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
             border-radius: 50%;
+            border: 2px solid #d4af37;
+            background: #111114;
         }
         .group {
             display: flex;
@@ -307,7 +128,7 @@
     <div class="container">
         <!-- Logo Alanı -->
         <div class="logo-container">
-            <img src="logo.png" alt="Logo" class="site-logo">
+            <img src="isimsiz (9).png" alt="Logo" class="site-logo">
         </div>
 
         <!-- 1. Banka Adı (Bilgi) -->
@@ -327,7 +148,7 @@
 
         <!-- 4. Telefon Kutusu ve Butonu -->
         <div class="group">
-            <div class="box phone-box" id="phoneText">0555 555 55 55</div>
+            <div class="box phone-box" id="phoneText">0531 634 93 57</div>
             <button class="btn" onclick="copyText('phoneText', 'Numara Kopyalandı!')">Numarayı Kopyala</button>
         </div>
     </div>
